@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/static/analytics.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+
 </head>
 
 <body>
@@ -18,77 +20,183 @@
 
     {% block content %}
     <h3>Analytics</h3>
-    <div class="container">
-        <div class="card">
-            <h2>Total Users</h2>
-            <p>5000</p>
-            <div class="chart">
-                <div id="chart1"></div>
-            </div>
+    <div class="graphcontainer">
+        <div class="graph">
+            <canvas id="myChart-1"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-2"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-3"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-4"></canvas>
+        </div>
+        <div class="graph" >
+            <canvas id="myChart-5"  ></canvas>
         </div>
 
-        <div class="card">
-            <h2>Total Revenue</h2>
-            <p>$50000</p>
-            <div class="chart">
-                <div id="chart2"></div>
-            </div>
-        </div>
 
-        <div class="card">
-            <h2>Orders</h2>
-            <p>500</p>
-            <div class="chart">
-                <div id="chart3"></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Conversion Rate</h2>
-            <p>5%</p>
-            <div class="chart">
-                <div id="chart4"></div>
-            </div>
-        </div>
     </div>
+    <script>
+        var ctx = document.getElementById('myChart-1').getContext('2d');
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Dataset 1',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false,
+                }, {
+                    label: 'Dataset 2',
+                    data: [28, 48, 40, 19, 86, 27, 90],
+                    borderColor: 'rgb(54, 162, 235)',
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }, title: {
+                    display: true,
+                    text: "Monthly Report"
+                }
+            }
+        });
+
+    </script>
+
+    <script>
+        var mon = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sept", "oct", "nov", "dec"];
+        var vals = [1500, 2000, 1200, 2000, 1150, 2000, 1500, 2000, 1050, 2000, 1150, 2000];
+        var barColors = ["red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown"];
+
+        new Chart("myChart-2", {
+            type: "bar",
+            data: {
+                labels: mon,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: vals
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Monthly Report"
+                }
+            }
+        });
+
+
+
+
+
+    </script>
+    <script>
+        var ctx = document.getElementById('myChart-3').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    data: [12, 19, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'My Pie Chart'
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var ctx = document.getElementById('myChart-4').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    data: [12, 19, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'My Pie Chart'
+                }
+            }
+        });
+
+    </script>
+    <script>
+        var mon = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sept", "oct", "nov", "dec"];
+        var vals = [1500, 2000, 1200, 2000, 1150, 2000, 1500, 2000, 1050, 2000, 1150, 2000];
+        var barColors = ["red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown"];
+
+        new Chart("myChart-5", {
+            type: "bar",
+            data: {
+                labels: mon,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: vals
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Monthly Report"
+                }
+            }
+        });
+
+
+
+
+
+    </script>
 
 
 
     {% endblock %}
 
-    <script>
-       
-		// Chart 1: Total Users
-    var ctx1 = document.getElementById("chart1").getContext('2d');
-    var myChart1 = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Total Users'],
-            datasets: [{
-                label: '# of Users',
-                data: [5000],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-            // Chart 2: Total Sales
-           
-    </script>
+
 
 
 </body>

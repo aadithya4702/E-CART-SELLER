@@ -1,27 +1,19 @@
- .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-    }
-    .card {
-      width: 300px;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 2px 2px 5px #ddd;
-      margin-bottom: 20px;
-    }
-    h2 {
-      margin-top: 0;
-      font-size: 24px;
-    }
-    p {
-      font-size: 36px;
-      font-weight: bold;
-      margin: 0 0 20px;
-    }
-    .chart {
-      height: 200px;
-    }
+.graphcontainer {
+    display: flex;
+    flex-wrap: wrap;
+  
+    justify-content: center;
+    align-items: center;
+}
+
+.graph {
+    width: 48%;
+    margin: 10px;
+    background-color: aliceblue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+}
+
+.graphcontainer::-webkit-scrollbar{
+  display: none;
+}
