@@ -1,0 +1,131 @@
+.rightpart .nametime {
+  display: flex;
+  align-items: center;
+  height: fit-content;
+  justify-content: space-between;
+
+  margin-right: 10px;
+}
+#datetime {
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 20px;
+  color: aliceblue;
+  background-color: #5e697c;
+  padding: 5px;
+  border-radius: 5px;
+}
+.rightpart > h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: black;
+}
+.boxpart {
+  margin-top: 40px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.boxes {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: gainsboro;
+
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  width: 250px;
+  border-radius: 10px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#boxicons i {
+  background-color: green;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+/* .boxes:nth-child(even) {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+
+  border: 1px solid rgba(255, 255, 255, 0.125);
+} */
+.boxes > h3 {
+  font-family: "Sono", sans-serif;
+  margin: 10px;
+  color: #333;
+  font-size: 18px;
+}
+.boxes > span {
+  font-family: "Sono", sans-serif;
+  color: black;
+  font-size: 18px;
+}
+#reco {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 30px 0px 30px 0px;
+  color: black;
+}
+.recentord {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #edf2f4;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  width: fit-content;
+}
+
+.recentord {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 90%;
+  font-family: "Sono", sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #333;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+
+th,
+td {
+  padding: 8px;
+
+  overflow-wrap: break-word;
+}
+
+th {
+  background-color: #2b2d42;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(219, 214, 214);
+}
+
+
+
+

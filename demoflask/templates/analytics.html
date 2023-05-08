@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/analytics.css">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+
+<body>
+    {% extends 'dash.html' %}
+
+    {% block title %}Analytics{% endblock %}
+
+    {% block content %}
+    <h3>Analytics</h3>
+    <div class="container">
+        <div class="card">
+            <h2>Total Users</h2>
+            <p>5000</p>
+            <div class="chart">
+                <div id="chart1"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Total Revenue</h2>
+            <p>$50000</p>
+            <div class="chart">
+                <div id="chart2"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Orders</h2>
+            <p>500</p>
+            <div class="chart">
+                <div id="chart3"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Conversion Rate</h2>
+            <p>5%</p>
+            <div class="chart">
+                <div id="chart4"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endblock %}
+
+    <script>
+       
+		// Chart 1: Total Users
+    var ctx1 = document.getElementById("chart1").getContext('2d');
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Total Users'],
+            datasets: [{
+                label: '# of Users',
+                data: [5000],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+            // Chart 2: Total Sales
+           
+    </script>
+
+
+</body>
+
+</html>

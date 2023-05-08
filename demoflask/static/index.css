@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins&family=Roboto+Mono&family=Sono&display=swap");
+
+/*
+font-family: 'Lobster', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Sono', sans-serif; */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+.nav {
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: space-between;
+  padding: 10px;
+  position: sticky;
+  background-color: rgba(132, 106, 106, 0.06);
+  background: aliceblue;
+}
+.nav .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Lobster", cursive;
+}
+.nav .logo img {
+  height: 70px;
+}
+.nav .logo h3 {
+  color: rgb(90, 84, 84);
+  font-size: 30px;
+  text-shadow: gray 0 -2px;
+  letter-spacing: 2px;
+}
+.nav .nav-links {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+.nav .nav-links a {
+  padding: 10px;
+  color: rgb(90, 84, 84);
+  font-family: "Sono", sans-serif;
+  font-size: 20px;
+}
+.nav .logo h3:hover,
+.nav .nav-links a:hover {
+  color: orangered;
+}
+.home {
+  width: 100%;
+  height: calc(100vh-10px);
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+.home .content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 50px;
+  padding: 30px;
+}
+.home .content h3 {
+  font-family: "Lobster", cursive;
+  font-size: 40px;
+  margin-bottom: 30px;
+  color: #2B2D42;
+  width: fit-content;
+}
+.home .content p {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 20px;
+  color: rgb(90, 84, 84);
+  margin-bottom: 30px;
+}
+.nav .nav-links button,
+.home .content button {
+  width: 200px;
+  height: 50px;
+  font-family: "Sono", sans-serif;
+  font-size: 18px;
+  background-color: #2B2D42;
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+  color: aliceblue;
+}
+.nav .nav-links button:hover,
+.home .content button:hover {
+  background-color: wheat;
+  color: #2B2D42;
+  border: 3px solid goldenrod;
+  font-weight: bold;
+}
+.home .image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+  background-color: white;
+  border-radius: 75% 25% 75% 25% / 60% 60% 25% 25%;
+  overflow: hidden;
+}
+.home .image img {
+  width: 700px;
+  height: 500px;
+  /* transition-delay: 10ms;
+  transition: ease-in-out; */
+}
+/* .home .image img:hover {
+  width: 750px;
+  height: 550px;
+} */
+.about {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+.about h3 {
+  text-align: center;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  margin: 10px;
+}
+
+.about .box {
+  height: fit-content;
+  width: fit-content;
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about .box1 {
+  height: fit-content;
+  width: fit-content;
+  margin: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.about .box1 .b1,
+.about .box .b1 {
+  width: fit-content;
+  background-color: aliceblue;
+  padding: 30px;
+  border-radius: 53% 47% 22% 78% / 40% 40% 45% 60%;
+  margin-right: 50px;
+}
+.about .box1 .b1 img,
+.about .box .b1 img {
+  width: 250px;
+  height: 250px;
+}
+.about .box1 .b2,
+.about .box .b2 {
+  height: 100%;
+
+  padding: 30px;
+  display: flex;
+
+  flex-direction: column;
+}
+.about .box1 .b2 h3,
+.about .box .b2 h3 {
+  width: fit-content;
+  font-family: "Lobster", sans-serif;
+  font-size: 25px;
+  color: #2B2D42;
+  text-decoration: underline;
+}
+.about .box1 .b2 p,
+.about .box .b2 p {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 18px;
+  color: rgb(90, 84, 84);
+}
+.contacts {
+  width: 100%;
+  height: 40vh;
+  background-color: #2B2D42;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  position: relative;
+}
+.contacts .cont {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.contacts .cont .logo > img {
+  width: fit-content;
+  height: 70px;
+  background-color: #edf2f4;
+  border-radius: 50%;
+  padding: 5px;
+}
+.contacts .cont .logo h3 {
+  font-family: "Lobster", sans-serif;
+  font-size: 30px;
+  color: aliceblue;
+  width: fit-content;
+}
+.contacts .cont .logo h3:hover {
+  color: grey;
+}
+.contacts .cont p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: aliceblue;
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+.contacts .cont .cont-links a {
+  padding: 10px;
+  background-color: bisque;
+  margin: 10px;
+  border-radius: 50%;
+  color: #2B2D42;
+}
+.contacts .cont .cont-links a:hover {
+  background-color: white;
+}
+.contacts .cont .cont-links a #git:hover {
+  color: black;
+}
+.contacts .cont .cont-links a #mail:hover {
+  color: blue;
+}
+.contacts .cont .cont-links a #link:hover {
+  color: rgb(15, 121, 221);
+}
+.contacts .cont .cont-links a #you:hover {
+  color: red;
+}
+.contacts #cp {
+  color: aliceblue;
+  font-size: 16px;
+  padding: 5px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  border-top: 2px solid wheat;
+}

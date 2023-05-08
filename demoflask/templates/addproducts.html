@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/addproducts.css">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+    {% extends 'dash.html' %}
+
+    {% block title %}Add Products{% endblock %}
+
+    {% block content %}
+    <h3>Add Products</h3>
+    <center>
+        <div class="wholeadd">
+            <div class="addcat">
+                <h3 onclick="log()" class="asp">Add Single Product</h3>
+
+                <h3 onclick="reg()" class="abl active">Add Bulk Listing</h3>
+            </div>
+
+            <div class="prodcontainer">
+
+                <div id="login" style="display: block;">
+                    <h2>BULK LISTING</h2>
+                    <form action="/add_products" method="POST" id="bulk-product-form" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label for="category-select">Category</label>
+                            <select class="form-control select-height-300" id="category-select" name="category">
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                            </select>
+                            <label for="subcategory-select">SubCategory</label>
+                            <select class="form-control select-height-300" id="subcategory-select" name="subcategory"
+                                disabled>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="home">Home</option>
+                            </select>
+                        </div>
+                        <div class="down" style="display: flex;align-items: center;">
+                            <a href="/download_template" class="btn btn-primary"><i class="fas fa-file-csv"></i>
+                                Download Template</a>
+                            <p style="opacity: 0.5;color: grey;">Download the template to add products before
+                                uploading<sup>*</sup>..</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="csv-file-input">CSV File</label>
+                            <input type="file" class="form-control-file" accept=".xlsx,.xls" id="csv-file-input"
+                                name="csv-file">
+                        </div>
+
+                        <center><button type="submit" onclick="validateFile()" class="btn btn-primary">Add
+                                Products</button></center>
+                    </form>
+                </div>
+                <div id="register" style="display:none;">
+                    <h2>SINGLE PRODUCT LISTING</h2>
+
+                    <form name="myForm" action="/add_single_product" method="POST" onsubmit="return validateForm()"
+                        class="addsingleprod" enctype="multipart/form-data">
+                        <div class="catsub">
+                            <label for="category">Category<sup>*</sup></label>
+                            <select name="category" id="category">
+                                <option value="0" selected>Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Jewels">Jewels</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Grocery">Grocery</option>
+                            </select>
+                            <label for="subcategory">SubCategory<sup>*</sup></label>
+                            <select name="subcategory" id="subcategory" disabled>
+                                <option value="0" selected>Select SubCategory</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Jewels">Jewels</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Grocery">Grocery</option>
+                            </select>
+                        </div>
+                        <h2 style="margin: 10px;">Product Details</h2>
+                        <table class="further">
+
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Brand<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="brand" id="pbrand"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Title<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="title" id="ptitle"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Description<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="desc" id="pdesc"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Price<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="price" id="pprice" placeholder="Enter amount in usd..">
+                                </td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Original Price<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="orgprice" id="porgprice"
+                                        placeholder="Enter amount in usd.."></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Rating<sup>*</sup></h3>
+                                </td>
+                                <td><input type="number" name="rating" id="prating" min="0"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Image<sup>*</sup></h3>
+                                </td>
+                                <td><input type="text" name="image" id="pimage" accept=".jpeg, .png, .jpg"
+                                        onchange="previewFile()"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Image 1</h3>
+                                </td>
+                                <td><input type="file" name="image1" accept=".jpeg, .png, .jpg" id="pimage1"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Image 2</h3>
+                                </td>
+                                <td><input type="file" name="image2" accept=".jpeg, .png, .jpg" id="pimage2"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Image 3</h3>
+                                </td>
+                                <td><input type="file" name="image3" accept=".jpeg, .png, .jpg" id="pimage3"></td>
+                            </tr>
+                            <tr class="rowdet">
+                                <td id="colapse">
+                                    <h3>Product Stock<sup>*</sup></h3>
+                                </td>
+                                <td><input type="number" name="stock" id="pstock" min="1"></td>
+                            </tr>
+                            <div>
+                                <input type="hidden" name="currency" id="currency" value="USD">
+                            </div>
+                        </table>
+
+
+                        <center><input type="submit" class="btn btn-primary" value="Add Product"></center>
+
+                    </form>
+                </div>
+
+
+            </div>
+
+            <!-- <img src="" height="200" alt="Image preview..." class="preview"> -->
+        </div>
+
+    </center>
+
+
+    <script>
+        function log() {
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var z = document.getElementsByClassName("asp")[0]; // get the first element with the class "asp"
+            var n = document.getElementsByClassName("abl")[0]; // get the first element with the class "abl"
+
+            if (x.style.display == 'block') {
+                x.style.display = 'none';
+                y.style.display = 'block';
+                z.classList.add('active');
+                n.classList.remove('active');
+            }
+        }
+
+        function reg() {
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var z = document.getElementsByClassName("asp")[0]; // get the first element with the class "asp"
+            var n = document.getElementsByClassName("abl")[0]; // get the first element with the class "abl"
+
+            if (y.style.display == 'block') {
+                y.style.display = 'none';
+                x.style.display = 'block';
+                n.classList.add('active');
+                z.classList.remove('active');
+            }
+        }
+
+
+
+
+
+
+
+    </script>
+
+    <script>
+        function validateForm() {
+            var brand = document.forms["myForm"]["brand"].value;
+            var title = document.forms["myForm"]["title"].value;
+            var price = document.forms["myForm"]["price"].value;
+            var orgprice = document.forms["myForm"]["orgprice"].value;
+            var rating = document.forms["myForm"]["rating"].value;
+            var image = document.forms["myForm"]["image"].value;
+            var stock = document.forms["myForm"]["stock"].value;
+
+            if (brand == "") {
+                alert("Product brand must be filled out");
+                return false;
+            }
+            if (title == "") {
+                alert("Product title must be filled out");
+                return false;
+            }
+            if (price == "") {
+                alert("Product price must be filled out");
+                return false;
+            }
+            if (price != "") {
+                value = price;
+                const formattedValue = "$" + value;
+                price.value = formattedValue;
+
+            }
+            if (orgprice == "") {
+                alert("Original price must be filled out");
+                return false;
+            }
+            if (orgprice != "") {
+                value = orgprice;
+                const formattedValue = "$" + value;
+                orgprice.value = formattedValue;
+
+            }
+            if (rating == "") {
+                alert("Product rating must be filled out");
+                return false;
+            }
+            if (image == "") {
+                alert("Please select a product image");
+                return false;
+            }
+            if (stock == "") {
+                alert("Product stock must be filled out");
+                return false;
+            }
+        }
+
+    </script>
+    <!-- <script>
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            try {
+                reader.addEventListener("load", function () {
+                    preview.src = reader.result;
+                }, false);
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+    </script> -->
+
+    <script>
+        function validateFile() {
+            const allowedExtensions = /(\.xlsx|\.xls)$/i;
+            const fileInput = document.getElementById('fileInput');
+            const fileName = fileInput.value;
+            if (!allowedExtensions.exec(fileName)) {
+                alert('Invalid file type. Only Excel files are allowed.');
+                fileInput.value = '';
+                return false;
+            }
+            // If the code reaches here, the file is valid.
+            alert('File uploaded successfully!');
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#bulk-product-form').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                console.log(formData);
+                $.ajax({
+                    type: 'POST',
+                    url: '/add_bulk_products',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+    <script>
+        const c = document.getElementById("category");
+        const s = document.getElementById("subcategory");
+        const bc = document.getElementById("category-select");
+        const bs = document.getElementById("subcategory-select");
+
+        c.addEventListener("change", function () {
+
+            s.disabled = false;
+
+
+        })
+        bc.addEventListener("change", function () {
+
+            bs.disabled = false;
+
+
+        })
+    </script>
+
+
+
+    {% endblock %}
+
+</body>
+
+</html>

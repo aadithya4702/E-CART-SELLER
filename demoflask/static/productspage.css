@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins&family=Roboto+Mono&family=Sono&display=swap");
+
+/*
+font-family: 'Lobster', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Sono', sans-serif; */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+.search {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+.sfield {
+  background-color: #2b2d42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#ser {
+  min-width: 250px;
+  outline: none;
+  border: 2px solid #2b2d42;
+  letter-spacing: 1px;
+
+  min-height: 40px;
+  padding: 5px;
+}
+.fa-search {
+  padding: 10px;
+  color: aliceblue;
+}
+#image {
+  max-width: 60px;
+}
+.prodlist {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #edf2f4;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  width: fit-content;
+}
+
+.prodlist {
+  max-height: 500px;
+  overflow-y: auto;
+
+  font-family: "Sono", sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #333;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+
+th,
+td {
+  padding: 8px;
+
+  overflow-wrap: break-word;
+}
+
+th {
+  background-color: #2b2d42;
+  color: #fff;
+  position: sticky;
+  top: 0;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgb(219, 214, 214);
+}
+#actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 16px;
+}
+.fa-edit {
+  color: green;
+}
+.fa-trash {
+  color: red;
+}
+.rgfilter {
+  width: 90%;
+  height: 50px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #edf2f4;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.updateform {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  max-width: 700px;
+  height: fit-content;
+
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #edf2f4;
+  padding: 20px 30px;
+  border-radius: 5px;
+}
+.input_field {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  margin-bottom: 10px;
+}
+.input_field input {
+  width: 100%;
+  height: 40px;
+  background-color: aliceblue;
+  outline: none;
+  border: 2px solid grey;
+  padding: 10px;
+}
+.input_field #ico {
+  background-color: #5a666b;
+  color: white;
+  width: 40px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subbut {
+  width: 100%;
+}
+.fa-times {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+#regbut {
+  width: 100%;
+  background-color: #093274;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  letter-spacing: 2px;
+  border-radius: 10px;
+}
+
+#regbut:hover {
+  background-color: rgb(1, 104, 1);
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/static/dash.css" />
+
+    <script type="text/javascript" src="/static/script.js"></script>
+
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <section class="contentarea">
+        <div class="topbar">
+            <div class="logo">
+                <img src="/static/E-CART SELLER (1).gif" alt="">
+                <h3 style="font-family: Lobster;">E-CART SELLER</h3>
+            </div>
+            <div class="storedet">
+
+                <div class="storecat">
+                    <center>
+                        <h3>{{shopown}}</h3>
+                        <p>{{shopname}}</p>
+                    </center>
+
+                </div>
+                <img src="/static/OIP.jpg" alt="" id="popdrop">
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar">
+
+            <a href="/home" title="Home" {% if active=='home' %}class="active" {% endif %}><i
+                    class="fas fa-home"></i></a>
+            <a href="/analytics" title="Analytics" {% if active=='analytics' %}class="active" {% endif %}><i
+                    class="fas fa-chart-bar"></i></a>
+            <a href="/addproducts" title="Add products" {% if active=='add' %}class="active" {% endif %}><i
+                    class="fas fa-plus"></i></a>
+            <a href="/orderspage" title="Orders" {% if active=='order' %}class="active" {% endif %}><i
+                    class="fa fa-scroll"></i></a>
+            <a href="/report" title="Reports" {% if active=='report' %}class="active" {% endif %}><i
+                    class="fas fa-exclamation-circle"></i></a>
+            <a href="/customer" title="Customers" {% if active=='customer' %}class="active" {% endif %}><i
+                    class="fas fa-user"></i></a>
+            <a href="/productspage" title="Products" {% if active=='product' %}class="active" {% endif %}><i
+                    class="fas fa-tasks"></i></a>
+
+
+
+
+
+
+            <a href="/logout" title="LogOut" id="logout"><i class="fas fa-sign-out-alt"></i></a>
+
+
+
+
+        </div>
+        <div class="rightpart">
+            {% block content %}{% endblock %}
+
+
+        </div>
+        <div class="updateform">
+
+            <i class="fas fa-times"></i>
+            {% for data in result %}
+            <form action="/updateprofile" method="post" class="form-input">
+
+
+                <input type="hidden" name="uname" id="uname" value="{{uname}}">
+
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-user"></i></span>
+                    <input type="text" name="name" id="" placeholder="Full Name" value="{{data[1]}}" required>
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-phone-alt"></i></span>
+                    <input type="text" name="phone" id="" placeholder="Phone Number" value="{{data[2]}}" required>
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-envelope"></i></span>
+                    <input type="email" name="email" id="" placeholder="E-Mail" required value="{{data[3]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-location-arrow"></i></span>
+                    <input type="text" name="address" id="" placeholder="Address" required value="{{data[4]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-store"></i></span>
+                    <input type="text" name="shopname" id="" placeholder="Shop Name" required value="{{data[5]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-tag"></i></span>
+                    <input type="text" name="ownername" id="" placeholder="Owner Name" required value="{{data[6]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-phone-alt"></i></span>
+                    <input type="text" name="shopno" id="" placeholder="Shop Number" required value="{{data[7]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-map-marker-alt"></i></span>
+                    <input type="text" name="shopaddress" id="" placeholder="Shop Address" required value="{{data[8]}}">
+
+
+                </div>
+                <div class="input_field">
+                    <span id="ico"><i class="fas fa-registered"></i></span>
+                    <input type="text" name="regno" id="" placeholder="Registration Number" required
+                        value="{{data[9]}}">
+
+
+                </div>
+
+                <div class="subbut">
+                    <input type="submit" value="Update Profile.." name="register" id="regbut">
+                </div>
+
+
+            </form>
+            {% endfor %}
+
+        </div>
+
+
+
+    </section>
+
+
+
+    <script>
+        function displayDateTime() {
+            const date = new Date();
+            const dateTimeString = date.toLocaleString();
+            document.getElementById("datetime").textContent = dateTimeString;
+        }
+
+        displayDateTime();
+        setInterval(displayDateTime, 1000);
+    </script>
+    <script>
+        const update = document.getElementsByClassName("updateform")[0];
+        const dropimg = document.getElementById("popdrop");
+        const close = document.getElementsByClassName("fa-times");
+
+        dropimg.addEventListener("click", (event) => {
+            update.style.display = "flex";
+        });
+
+        for (let i = 0; i < close.length; i++) {
+            close[i].addEventListener("click", () => {
+                update.style.display = "none";
+            });
+        }
+    </script>
+    
+        
+   
+
+</body>
+
+</html>

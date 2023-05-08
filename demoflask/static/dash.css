@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins&family=Roboto+Mono&family=Sono&display=swap");
+
+/*
+font-family: 'Lobster', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Sono', sans-serif; */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.contentarea {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+.topbar {
+  background-color: #2b2d42;
+  max-height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.topbar .logo > img {
+  max-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.topbar .logo > h3 {
+  font-family: "Poppins", sans-serif;
+  color: aliceblue;
+}
+.topbar .storedet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+}
+.topbar .storedet > img {
+  max-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.topbar .storedet .storecat {
+  font-family: "Roboto Mono", sans-serif;
+  color: #edf2f4;
+  height: fit-content;
+}
+.storecat h3 {
+  width: fit-content;
+  font-size: 25px;
+  margin-top: 10px;
+}
+.storecat > p {
+  font-size: 16px;
+}
+.main {
+  height: calc(80px);
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  margin-top: 70px;
+  height: 100%;
+  background-color: #5e697c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar > a {
+  background-color: aliceblue;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  margin-top: 25px;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #151837;
+  transition: 10ms ease-in-out;
+}
+.sidebar > a:hover {
+  background-color: #151837;
+  color: aliceblue;
+  border-radius: 50%;
+}
+.sidebar > .active {
+  background-color: #151837;
+  color: aliceblue;
+  border-radius: 50%;
+  transition:0.5s ease-in-out; 
+}
+.sidebar #logout {
+  position: fixed;
+  bottom: 20px;
+}
+.sidebar #logout:hover {
+  background-color: crimson;
+}
+.rightpart {
+  margin-top: 10px;
+  margin-left: 80px;
+  margin-right: 10px;
+  height: calc(100vh - 80px); /* Adjust the height as per your layout */
+  overflow-y: auto;
+}
+.updateform {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  max-width: 700px;
+  height: fit-content;
+
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: #edf2f4;
+  padding: 20px 30px;
+  border-radius: 5px;
+}
+.form-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 30px;
+  column-gap: 15px;
+}
+
+.input_field {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  margin-bottom: 10px;
+}
+.input_field input {
+  width: 100%;
+  height: 40px;
+  background-color: aliceblue;
+  outline: none;
+  border: 2px solid grey;
+  padding: 10px;
+}
+.input_field #ico {
+  background-color: #5a666b;
+  color: white;
+  width: 40px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subbut {
+  width: 100%;
+}
+.fa-times {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}
+#regbut {
+  width: 100%;
+  background-color: #093274;
+  color: white;
+  font-size: 20px;
+  padding: 5px;
+  letter-spacing: 2px;
+  border-radius: 10px;
+}
+
+#regbut:hover {
+  background-color: rgb(1, 104, 1);
+}

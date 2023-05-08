@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/productspage.css">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+
+    {% extends 'dash.html' %}
+
+    {% block title %}Products{% endblock %}
+
+    {% block content %}
+    <div class="search">
+
+        <h3>Products List</h3>
+
+        <div class="sfield">
+            <input type="search" name="searcch" id="ser" placeholder="Search for products..">
+            <span><i class="fas fa-search"></i></span>
+        </div>
+    </div>
+
+    <div style="display: flex;flex-direction: column;opacity: 1;" class="blur">
+        <div class="rgfilter">
+            <h3>Filter</h3>
+
+        </div>
+        <div class="prodlist">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>ESIN</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>MRP</th>
+                        <th>Brand</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for data in result %}
+                    <tr>
+                        <td><img src="{{data[11]}}" alt="" id="image"></td>
+                        <td id="pid">{{data[1]}}</td>
+                        <td id="ptitle">{{data[5]}}</td>
+                        <td id="pdesc">{{data[6]}}</td>
+                        <td id="pprice">{{data[7]}}</td>
+                        <td id="pmrp">{{data[8]}}</td>
+                        <td id="pbrand">{{data[4]}}</td>
+                        <td id="pstock">{{data[10]}}</td>
+                        <td id="actions"><span><i class="fas fa-edit" value="{{data[1]}}"
+                                    data-id="{{ data[1] }}"></i></span><a href="/deleteprod/{{data[1]}} "
+                                method="get"><i class="fas fa-trash"></i></a><span></span></td>
+
+
+                    </tr>
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="updateform">
+        <a href=""><i class="fas fa-times"></i></a>
+        <form action="/update" method="post">
+
+            <input type="hidden" name="esin" id="esin" value="">
+
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-heading"></i></span>
+                <input type="text" name="ptitle" id="" placeholder="Product Title" required>
+
+
+            </div>
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-file-prescription"></i></span>
+                <input type="text" name="pdesc" id="" placeholder="Product Description" required>
+
+
+            </div>
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-dollar-sign"></i></span>
+                <input type="text" name="pprice" id="" placeholder="Product price" required>
+
+
+            </div>
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-tag"></i></span>
+                <input type="text" name="pmrp" id="" placeholder="Product MRP" required>
+
+
+            </div>
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-cubes"></i></span>
+                <input type="text" name="pstock" id="" placeholder="Product Stock" required>
+
+
+            </div>
+            <div class="subbut">
+                <input type="submit" value="Update" name="register" id="regbut">
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    <script>
+        const update = document.getElementsByClassName("updateform")[0];
+        const edit = document.getElementsByClassName("fa-edit");
+        const close = document.getElementsByClassName("fa-times");
+        const esinval = document.getElementById("esin");
+        const blurElements = document.getElementsByClassName("blur");
+
+
+        const ptitle = document.getElementsByName("ptitle")[0];
+        const pdesc = document.getElementsByName("pdesc")[0];
+        const pprice = document.getElementsByName("pprice")[0];
+        const pmrp = document.getElementsByName("pmrp")[0];
+        const pstock = document.getElementsByName("pstock")[0];
+
+        for (let i = 0; i < edit.length; i++) {
+            edit[i].addEventListener("click", (event) => {
+                const productId = event.target.getAttribute("data-id");
+                console.log(productId);
+
+                esinval.value = productId; // set the value of the input field to productId
+
+                ptitle.value = event.target.closest("tr").querySelector("#ptitle").textContent;
+                pdesc.value = event.target.closest("tr").querySelector("#pdesc").textContent;
+                pprice.value = event.target.closest("tr").querySelector("#pprice").textContent;
+                pmrp.value = event.target.closest("tr").querySelector("#pmrp").textContent;
+                pstock.value = event.target.closest("tr").querySelector("#pstock").textContent;
+                update.style.display = "flex";
+                blurElements.style.opacity = 0.3;
+            });
+        }
+
+        for (let i = 0; i < close.length; i++) {
+            close[i].addEventListener("click", () => {
+                update.style.display = "none";
+                blurElements.style.opacity = 1;
+            });
+        }
+    </script>
+
+
+
+    {% endblock %}
+
+</body>
+
+</html>

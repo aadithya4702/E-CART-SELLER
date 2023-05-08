@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Poppins&family=Roboto+Mono&family=Sono&display=swap");
+
+/*
+font-family: 'Lobster', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Sono', sans-serif; */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.prodcontainer {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 850px;
+}
+
+.addcat {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: gainsboro;
+
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  margin: 10px;
+  width: fit-content;
+  height: fit-content;
+}
+.asp,
+.abl {
+  border-radius: 10px;
+  padding: 10px;
+  height: 100%;
+}
+.active {
+  background-color: crimson;
+  color: white;
+}
+h2 {
+  font-family: "Poppins", sans-serif;
+  
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+.form-group,
+.catsub {
+  padding: 10px;
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 200;
+  display: flex;
+  color: black;
+  font-size: 20px;
+  gap: 20px;
+}
+.form-control {
+  min-width: 150px;
+  max-width: 200px;
+
+  text-align: center;
+  color: white;
+  background-color: #8d99ae;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
+}
+
+.form-control-file {
+  background-color: #8d99ae;
+  color: aliceblue;
+  font-family: "Poppins", sans-serif;
+  padding: 2px;
+  border-radius: 2px;
+  font-size: 18px;
+}
+.btn {
+  width: fit-content;
+  padding: 5px;
+  margin: 10px;
+  background-color: #ef233c;
+  border-radius: 10px;
+  border: 1px solid goldenrod;
+  font-size: 18px;
+  color: white;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+.addsingleprod {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.rowdet > h3 {
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+}
+.rowdet > input {
+  width: 300px;
+  flex: 1;
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 17px;
+  padding: 2px;
+}
+.rowdet > h3 > sup,
+label > sup {
+  color: #ef233c;
+}
+.preview {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+tr:hover {
+  background-color: wheat;
+}
+#colapse{
+  text-align: end;
+
+}
+#colapse>h3{
+  font-family: "Roboto Mono",sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  gap: 10px;
+
+
+}
+td>input{
+  flex: 1;
+  height: 30px;
+  border: none;
+  background-color: #ddd;
+  border-radius: 5px;
+  color: black;
+  padding: 2px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-family: "Poppins",sans-serif;
+}
+#colapse>h3>sup{
+  color: #ef233c;
+}

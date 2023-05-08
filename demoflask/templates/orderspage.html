@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/orderspage.css">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+    {% extends 'dash.html' %}
+
+    {% block title %}Orderspage{% endblock %}
+
+    {% block content %}
+    <h3>Orders</h3>
+
+    <!-- <div class="recentord">
+
+
+        <table class="tableofrecentord">
+            <tr id="fic">
+                <th>Product Name</th>
+                <th>Order Id</th>
+                <th>Payment status</th>
+                <th>Order Status</th>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+            <tr>
+                <td>bag</td>
+                <td>#sXlfM3</td>
+                <td>paid</td>
+                <td>pending</td>
+            </tr>
+
+
+        </table>
+
+    </div> -->
+
+    <div class="container orders-container">
+
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ORD-123456</td>
+                    <td>2022-05-01</td>
+                    <td>$150.00</td>
+                    <td class="order-status pending-status">Pending</td>
+                    <td><a href="#" class="change-status-btn">Change Status</a></td>
+                </tr>
+                <tr>
+                    <td>ORD-123457</td>
+                    <td>2022-04-30</td>
+                    <td>$80.00</td>
+                    <td class="order-status shipped-status">Shipped</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>ORD-123458</td>
+                    <td>2022-04-28</td>
+                    <td>$250.00</td>
+                    <td class="order-status delivered-status">Delivered</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>ORD-123459</td>
+                    <td>2022-04-25</td>
+                    <td>$90.00</td>
+                    <td class="order-status cancelled-status">Cancelled</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock %}
+
+</body>
+
+</html>
