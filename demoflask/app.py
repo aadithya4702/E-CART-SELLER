@@ -336,11 +336,24 @@ def logreg():
 def home():
     uname = session.get('username')
 
-    cursor = mysql.connection.cursor()
-    cursor.execute("Select * from seller Where username = %s",(uname,))
-    res = cursor.fetchall()
+    with mysql.connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM seller WHERE username = %s", (uname,))
+        res = cursor.fetchall()
 
-    return render_template('home.html',res = res, active='home')
+        if not res:
+            return "User not found", 404
+
+        sidval = res[0][0]
+
+
+        cursor.execute("SELECT SUM(ordertotal), SUM(orderoftotparitem), SUM(orderstatus = 'pending') as pending FROM orders WHERE sellerid = %s", (sidval,))
+        statdata = cursor.fetchone()
+
+        cursor.execute("SELECT SUM(ordertotal), SUM(orderoftotparitem), SUM(orderstatus = 'pending') as pending FROM orders WHERE sellerid = %s", (sidval,))
+        statdata = cursor.fetchone()        
+
+
+    return render_template('home.html', res=res, statdata=statdata, active='home')
 
 
 @app.route('/analytics')
