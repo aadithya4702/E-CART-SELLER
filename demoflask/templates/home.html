@@ -66,66 +66,15 @@
                 <th>Payment status</th>
                 <th>Order Status</th>
             </tr>
+            {% for  data in rdata %}
             <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
+                <td>{{data[2]}}</td>
+                <td>#{{data[0]}}</td>
+                <td>{{data[1]}}</td>
+                <td>{{data[3]}}</td>
             </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
+            {% endfor %}
+            
 
 
         </table>

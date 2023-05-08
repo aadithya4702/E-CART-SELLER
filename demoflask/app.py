@@ -349,11 +349,12 @@ def home():
         cursor.execute("SELECT SUM(ordertotal), SUM(orderoftotparitem), SUM(orderstatus = 'pending') as pending FROM orders WHERE sellerid = %s", (sidval,))
         statdata = cursor.fetchone()
 
-        cursor.execute("SELECT SUM(ordertotal), SUM(orderoftotparitem), SUM(orderstatus = 'pending') as pending FROM orders WHERE sellerid = %s", (sidval,))
-        statdata = cursor.fetchone()        
+        cursor.execute("SELECT orders.orderid, orderdetails.paymentstatus, products.ptitle, orders.orderstatus FROM orders JOIN orderdetails ON orders.orderid = orderdetails.orderid JOIN products ON orders.orderproductid = products.esin WHERE orders.sellerid = %s ORDER BY orders.orderdate DESC LIMIT 10;", (sidval,))
+        rodata = cursor.fetchall()     
+        print(rodata)   
 
 
-    return render_template('home.html', res=res, statdata=statdata, active='home')
+    return render_template('home.html', res=res, statdata=statdata,rdata = rodata, active='home')
 
 
 @app.route('/analytics')
