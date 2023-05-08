@@ -359,7 +359,31 @@ def home():
 
 @app.route('/analytics')
 def analytics():
-    return render_template('analytics.html', active='analytics')
+    user_data = inject_data()
+    sellerid = user_data.get('sellerid')
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,))
+    salestrend = cursor.fetchall()
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT SUM(orders.orderoftotparitem), products.ptitle  FROM orders  JOIN products ON orders.orderproductid = products.esin  WHERE orders.sellerid = %s GROUP BY products.ptitle;",(sellerid,))
+    revbyprod = cursor.fetchall()
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("select count(orders.orderstatus),orders.orderstatus from orders where orders.sellerid = %s group by orders.orderstatus",(sellerid,))
+    ordstat = cursor.fetchall()
+
+
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(" SELECT DATE_FORMAT(orderdate, '%%Y-%%m') AS month,SUM(ordertotal) AS revenue FROM orders where sellerid =%s GROUP BY DATE_FORMAT(orderdate, '%%Y-%%m') ORDER BY month ASC",(sellerid,))
+    revdata = cursor.fetchall()
+    print(revdata)
+
+
+
+    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,revdata = revdata)
 
 @app.route('/addproducts')
 def addproducts():

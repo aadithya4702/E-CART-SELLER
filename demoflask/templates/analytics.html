@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/analytics.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
 
 
 
@@ -33,28 +34,35 @@
         <div class="graph">
             <canvas id="myChart-4"></canvas>
         </div>
-        <div class="graph" >
-            <canvas id="myChart-5"  ></canvas>
+        <div class="graph">
+            <canvas id="myChart-5"></canvas>
         </div>
 
 
     </div>
     <script>
         var ctx = document.getElementById('myChart-1').getContext('2d');
+        var data = {{ data1 | tojson }};
 
-        var myChart = new Chart(ctx, {
+
+
+        var labels = [];
+        var sales = [];
+
+        for (var i = 0; i < data.length; i++) {
+            // Use toLocaleDateString to format date in local time zone
+            labels.push(new Date(data[i][0]).toLocaleDateString());
+            sales.push(parseFloat(data[i][2])); // Convert sales to float
+        }
+
+        var chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: labels,
                 datasets: [{
-                    label: 'Dataset 1',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'Sales Trend',
+                    data: sales,
                     borderColor: 'rgb(255, 99, 132)',
-                    fill: false,
-                }, {
-                    label: 'Dataset 2',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    borderColor: 'rgb(54, 162, 235)',
                     fill: false,
                 }]
             },
@@ -66,19 +74,30 @@
                             beginAtZero: true
                         }
                     }]
-                }, title: {
+                },
+                title: {
                     display: true,
-                    text: "Monthly Report"
+                    text: "Daily Sales Trend"
                 }
             }
         });
-
     </script>
 
+
     <script>
-        var mon = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sept", "oct", "nov", "dec"];
-        var vals = [1500, 2000, 1200, 2000, 1150, 2000, 1500, 2000, 1050, 2000, 1150, 2000];
-        var barColors = ["red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown"];
+        var data = {{ data2 | tojson }};
+
+        var mon = [];
+        var vals = [];
+        var barColors = [];
+
+
+
+        for (var i = 0; i < data.length; i++) {
+            mon.push(data[i][1]); //change to the second column
+            vals.push(data[i][0]); //change to the first column
+            barColors.push(getRandomColor()); // add a function to generate random colors
+        }
 
         new Chart("myChart-2", {
             type: "bar",
@@ -93,24 +112,42 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: "Monthly Report"
+                    text: "Sale of Individual Product"
                 }
             }
         });
 
-
-
-
-
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
     </script>
+
+
+
     <script>
         var ctx = document.getElementById('myChart-3').getContext('2d');
+        var data = {{ data3 | tojson }};
+        console.log(data);
+        var labels = []
+        var dataofstat = []
+        console.log(labels);
+        for (var i = 0; i < data.length; i++) {
+            // Use toLocaleDateString to format date in local time zone
+            labels.push(data[i][0]);
+            dataofstat.push(data[i][1]); // Convert sales to float
+        }
+
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Red', 'Blue', 'Yellow'],
+                labels: labels,
                 datasets: [{
-                    data: [12, 19, 3],
+                    data: dataofstat,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -127,11 +164,12 @@
             options: {
                 title: {
                     display: true,
-                    text: 'My Pie Chart'
+                    text: 'Order Status'
                 }
             }
         });
     </script>
+
 
     <script>
         var ctx = document.getElementById('myChart-4').getContext('2d');
@@ -164,27 +202,45 @@
 
     </script>
     <script>
-        var mon = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sept", "oct", "nov", "dec"];
-        var vals = [1500, 2000, 1200, 2000, 1150, 2000, 1500, 2000, 1050, 2000, 1150, 2000];
-        var barColors = ["red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "crimson", "red", "green", "blue", "orange", "brown"];
+        var revenueData = {{ revdata| tojson }};
+        var months = [];
+        var revenue = [];
 
-        new Chart("myChart-5", {
-            type: "bar",
+        // Extract data from JSON and format it for Chart.js
+        for (var i = 0; i < revenueData.length; i++) {
+            months.push(revenueData[i][0]);
+            revenue.push(revenueData[i][1]);
+        }
+
+        // Create bar chart using Chart.js
+        var ctx = document.getElementById('revenue-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
             data: {
-                labels: mon,
+                labels: months,
                 datasets: [{
-                    backgroundColor: barColors,
-                    data: vals
+                    label: 'Revenue',
+                    data: revenue,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: "Monthly Report"
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Revenue by Month'
+                    }
                 }
             }
         });
+    </script>
 
 
 
