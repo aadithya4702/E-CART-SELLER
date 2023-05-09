@@ -436,7 +436,12 @@ def report():
 
 @app.route('/customer')
 def customer():
-    return render_template('customer.html', active='customer')
+    user_data = inject_data()
+    sellerid = user_data.get('sellerid')
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT users.username, users.email, users.address, SUM(orders.orderoftotparitem) as total_orders,sum(orders.ordertotal) as totalamount FROM users JOIN orders ON users.username = orders.username where orders.sellerid = %s GROUP BY users.username",(sellerid,))
+    customers = cursor.fetchall()
+    return render_template('customer.html', active='customer',customers = customers)
 
 @app.route('/productspage')
 def productspage():

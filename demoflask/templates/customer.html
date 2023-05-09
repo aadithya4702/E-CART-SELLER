@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/static/customer.css">
+    <link rel="stylesheet" href="/static/productspage.css">
 </head>
 
-<body>
+<body >
     {% extends 'dash.html' %}
 
     {% block title %}Customer{% endblock %}
@@ -19,12 +19,37 @@
 
 
 
-    <div class="sum">
+    <!-- <div class="sum">
         <input type="text" name="summa" id="in">
         <label for="in">SAMPLE</label>
+    </div> -->
+
+    <div class="prodlist" style="width: 90%;">
+        <table class="">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Total Orders</th>
+                    <th>Total Amounts</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer[0] }}</td>
+                    <td>{{ customer[1] }}</td>
+                    <td>{{ customer[2] }}</td>
+                    <td>{{customer[3]}}</td>
+                    <td>&#8377;{{ customer[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    
+
 
 
     {% endblock %}
