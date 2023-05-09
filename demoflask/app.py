@@ -99,17 +99,32 @@ def calculate_num_pages(num_items, items_per_page):
 def add_products():
     user_data = inject_data()
 
-
     # Get the uploaded file
+    uploaded_file = request.files['file']
 
-    csv_file = request.files['csv-file']
+    print(uploaded_file)
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'])
    
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(csv_file.filename))
-    csv_file.save(file_path)
+    # Check the file extension and save the file
+    if uploaded_file.filename.endswith('.csv'):
+        file_format = 'csv'
+    elif uploaded_file.filename.endswith('.xlsx'):
+        file_format = 'xlsx'
+    else:
+        return 'Invalid file format. Please upload a CSV or XLSX file.'
 
-    # Read the Excel data using pandas
-    df = pd.read_excel(file_path, engine='openpyxl')
-    
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename))
+    uploaded_file.save(file_path)
+
+    # Read the data using pandas
+    if file_format == 'csv':
+        df = pd.read_csv(file_path)
+    elif file_format == 'xlsx':
+        df = pd.read_excel(file_path, engine='openpyxl')
+    else:
+        return 'Error reading the file.'
+
     # Remove rows with NaN values
     df = df.dropna(how='any')
     
@@ -131,10 +146,7 @@ def add_products():
         pimage1 = 0
         pimage2 = 0
         pimage3 = 0
-        
 
-
-        
         # Insert the values into the database
         cursor = mysql.connection.cursor()
         sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid,currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
@@ -142,9 +154,8 @@ def add_products():
         cursor.execute(sql, values)
         mysql.connection.commit()
 
-
-    
     return 'Products added successfully'
+
 
 
 @app.route('/add_single_product', methods=['GET','POST'])
