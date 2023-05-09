@@ -33,7 +33,8 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
+# app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
+app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'
 app.config['MYSQL_DB'] = 'ecart'
 
 
@@ -433,7 +434,9 @@ def update():
     return redirect(url_for('productspage'))
 
 
-@app.route('/updateprofile', methods=['POST'])
+@app.route('/updateprofile', methods=['POST'])  
+
+
 def updateprofile():
             name = session.get('username')
             fullname = request.form['name']
@@ -444,7 +447,7 @@ def updateprofile():
             regno =request.form['regno']
             email = request.form['email']
             mobile = request.form['phone']
-
+ 
             address = request.form['address']
             cursor = mysql.connection.cursor()
             cursor.execute("UPDATE seller SET fullname=%s, phone=%s, email=%s, address=%s, shopname=%s,ownername =%s,shopnumber =%s,shopaddress=%s,regnum=%s WHERE username=%s", (fullname, mobile, email, address, shopname, ownername,shopno,shopaddress,regno,name))

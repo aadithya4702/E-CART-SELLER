@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/analytics.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
+  
 
 
 
@@ -128,47 +128,37 @@
     </script>
 
 
+<script>
+    var datat = JSON.parse('{{ data3 | tojson | safe }}');
 
-    <script>
-        var ctx = document.getElementById('myChart-3').getContext('2d');
-        var data = {{ data3 | tojson }};
-        console.log(data);
-        var labels = []
-        var dataofstat = []
-        console.log(labels);
-        for (var i = 0; i < data.length; i++) {
-            // Use toLocaleDateString to format date in local time zone
-            labels.push(data[i][0]);
-            dataofstat.push(data[i][1]); // Convert sales to float
+    var labels = [];
+    var data = [];
+
+    for (var i = 0; i < datat.length; i++) {
+        labels.push(datat[i][1]);
+        data.push(datat[i][0]);
+    }
+
+    var barColors = [      "#b91d47",      "#00aba9",      "#2b5797",      "#e8c3b9",      "#1e7145"    ];
+
+    new Chart("myChart-3", {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [{
+          backgroundColor: barColors,
+          data: data
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Order Status"
         }
+      }
+    });
+</script>
 
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: dataofstat,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Order Status'
-                }
-            }
-        });
-    </script>
 
 
     <script>
