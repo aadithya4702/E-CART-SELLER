@@ -343,7 +343,7 @@ def home():
     return render_template('home.html',res = res, active='home')
 
 
-@app.route('/analytics')
+@app.route('/analytics') 
 def analytics():
     return render_template('analytics.html', active='analytics')
 
