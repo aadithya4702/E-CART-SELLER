@@ -34,7 +34,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
-# app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'
+# app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'        
 app.config['MYSQL_DB'] = 'ecart'
 
 
