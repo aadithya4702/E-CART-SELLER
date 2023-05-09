@@ -29,7 +29,7 @@ from flask_mail import Mail, Message
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = 'uploads'  
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
