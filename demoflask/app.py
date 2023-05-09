@@ -33,8 +33,8 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
-app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'
+app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
+# app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'
 app.config['MYSQL_DB'] = 'ecart'
 
 
@@ -375,7 +375,7 @@ def analytics():
     sellerid = user_data.get('sellerid')
 
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,))
+    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,)) 
     salestrend = cursor.fetchall()
 
     cursor = mysql.connection.cursor()
@@ -406,8 +406,29 @@ def addproducts():
 
 @app.route('/orderspage')
 def orderspage():
+    user_data = inject_data()
+    sellerid = user_data.get('sellerid')
+    cur = mysql.connection.cursor()
+    cur.execute("select * from orders where sellerid = %s",(sellerid,))
+    orders = cur.fetchall()
 
-    return render_template('orderspage.html', active='order')
+
+    return render_template('orderspage.html', active='order',orders = orders)
+
+
+@app.route('/change_status', methods=['POST'])
+def change_status():
+    data = request.get_json()
+    order_id = data['id']
+    new_status = data['status']
+    print(order_id)
+    print(new_status)
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE orders SET orderstatus=%s WHERE orderid=%s", (new_status, order_id))
+    mysql.connection.commit()
+    cur.close()
+    return jsonify({'message': 'Status changed successfully'})
+
 
 @app.route('/report')
 def report():
