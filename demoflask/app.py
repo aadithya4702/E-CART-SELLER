@@ -375,7 +375,10 @@ def analytics():
     cursor.execute("select count(orders.orderstatus),orders.orderstatus from orders where orders.sellerid = %s group by orders.orderstatus",(sellerid,))
     ordstat = cursor.fetchall()
 
-
+    cursor = mysql.connection.cursor()
+    cursor.execute("select sum(orders.orderoftotparitem),products.psubcategory from orders join products on orders.orderproductid = products.esin where orders.sellerid=%s group by products.psubcategory;",(sellerid,))
+    salebycat = cursor.fetchall()
+    print(salebycat)
 
     cursor = mysql.connection.cursor()
     cursor.execute(" SELECT DATE_FORMAT(orderdate, '%%Y-%%m') AS month,SUM(ordertotal) AS revenue FROM orders where sellerid =%s GROUP BY DATE_FORMAT(orderdate, '%%Y-%%m') ORDER BY month ASC",(sellerid,))
@@ -384,7 +387,7 @@ def analytics():
 
 
 
-    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,revdata = revdata)
+    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,salecat = salebycat,revdata = revdata)
 
 @app.route('/addproducts')
 def addproducts():
