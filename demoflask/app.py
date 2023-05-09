@@ -33,7 +33,8 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
+# app.config['MYSQL_PASSWORD'] = 'Aadi@9011'
+app.config['MYSQL_PASSWORD'] = 'Jeffrey@08'
 app.config['MYSQL_DB'] = 'ecart'
 
 
@@ -98,17 +99,32 @@ def calculate_num_pages(num_items, items_per_page):
 def add_products():
     user_data = inject_data()
 
-
     # Get the uploaded file
+    uploaded_file = request.files['file']
 
-    csv_file = request.files['csv-file']
+    print(uploaded_file)
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'])
    
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(csv_file.filename))
-    csv_file.save(file_path)
+    # Check the file extension and save the file
+    if uploaded_file.filename.endswith('.csv'):
+        file_format = 'csv'
+    elif uploaded_file.filename.endswith('.xlsx'):
+        file_format = 'xlsx'
+    else:
+        return 'Invalid file format. Please upload a CSV or XLSX file.'
 
-    # Read the Excel data using pandas
-    df = pd.read_excel(file_path, engine='openpyxl')
-    
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename))
+    uploaded_file.save(file_path)
+
+    # Read the data using pandas
+    if file_format == 'csv':
+        df = pd.read_csv(file_path)
+    elif file_format == 'xlsx':
+        df = pd.read_excel(file_path, engine='openpyxl')
+    else:
+        return 'Error reading the file.'
+
     # Remove rows with NaN values
     df = df.dropna(how='any')
     
@@ -130,10 +146,7 @@ def add_products():
         pimage1 = 0
         pimage2 = 0
         pimage3 = 0
-        
 
-
-        
         # Insert the values into the database
         cursor = mysql.connection.cursor()
         sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid,currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
@@ -141,9 +154,8 @@ def add_products():
         cursor.execute(sql, values)
         mysql.connection.commit()
 
-
-    
     return 'Products added successfully'
+
 
 
 @app.route('/add_single_product', methods=['GET','POST'])
@@ -357,7 +369,7 @@ def home():
     return render_template('home.html', res=res, statdata=statdata,rdata = rodata, active='home')
 
 
-@app.route('/analytics')
+@app.route('/analytics') 
 def analytics():
     user_data = inject_data()
     sellerid = user_data.get('sellerid')
@@ -374,7 +386,10 @@ def analytics():
     cursor.execute("select count(orders.orderstatus),orders.orderstatus from orders where orders.sellerid = %s group by orders.orderstatus",(sellerid,))
     ordstat = cursor.fetchall()
 
-
+    cursor = mysql.connection.cursor()
+    cursor.execute("select sum(orders.orderoftotparitem),products.psubcategory from orders join products on orders.orderproductid = products.esin where orders.sellerid=%s group by products.psubcategory;",(sellerid,))
+    salebycat = cursor.fetchall()
+    print(salebycat)
 
     cursor = mysql.connection.cursor()
     cursor.execute(" SELECT DATE_FORMAT(orderdate, '%%Y-%%m') AS month,SUM(ordertotal) AS revenue FROM orders where sellerid =%s GROUP BY DATE_FORMAT(orderdate, '%%Y-%%m') ORDER BY month ASC",(sellerid,))
@@ -383,7 +398,7 @@ def analytics():
 
 
 
-    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,revdata = revdata)
+    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,salecat = salebycat,revdata = revdata)
 
 @app.route('/addproducts')
 def addproducts():
@@ -433,7 +448,9 @@ def update():
     return redirect(url_for('productspage'))
 
 
-@app.route('/updateprofile', methods=['POST'])
+@app.route('/updateprofile', methods=['POST'])  
+
+
 def updateprofile():
             name = session.get('username')
             fullname = request.form['name']
@@ -444,7 +461,7 @@ def updateprofile():
             regno =request.form['regno']
             email = request.form['email']
             mobile = request.form['phone']
-
+ 
             address = request.form['address']
             cursor = mysql.connection.cursor()
             cursor.execute("UPDATE seller SET fullname=%s, phone=%s, email=%s, address=%s, shopname=%s,ownername =%s,shopnumber =%s,shopaddress=%s,regnum=%s WHERE username=%s", (fullname, mobile, email, address, shopname, ownername,shopno,shopaddress,regno,name))
