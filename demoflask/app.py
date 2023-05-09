@@ -363,7 +363,7 @@ def analytics():
     sellerid = user_data.get('sellerid')
 
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,))
+    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,)) 
     salestrend = cursor.fetchall()
 
     cursor = mysql.connection.cursor()
