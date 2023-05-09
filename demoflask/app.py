@@ -336,16 +336,54 @@ def logreg():
 def home():
     uname = session.get('username')
 
-    cursor = mysql.connection.cursor()
-    cursor.execute("Select * from seller Where username = %s",(uname,))
-    res = cursor.fetchall()
+    with mysql.connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM seller WHERE username = %s", (uname,))
+        res = cursor.fetchall()
 
-    return render_template('home.html',res = res, active='home')
+        if not res:
+            return "User not found", 404
+
+        sidval = res[0][0]
+
+
+        cursor.execute("SELECT SUM(ordertotal), SUM(orderoftotparitem), SUM(orderstatus = 'pending') as pending FROM orders WHERE sellerid = %s", (sidval,))
+        statdata = cursor.fetchone()
+
+        cursor.execute("SELECT orders.orderid, orderdetails.paymentstatus, products.ptitle, orders.orderstatus FROM orders JOIN orderdetails ON orders.orderid = orderdetails.orderid JOIN products ON orders.orderproductid = products.esin WHERE orders.sellerid = %s ORDER BY orders.orderdate DESC LIMIT 10;", (sidval,))
+        rodata = cursor.fetchall()     
+        print(rodata)   
+
+
+    return render_template('home.html', res=res, statdata=statdata,rdata = rodata, active='home')
 
 
 @app.route('/analytics') 
 def analytics():
-    return render_template('analytics.html', active='analytics')
+    user_data = inject_data()
+    sellerid = user_data.get('sellerid')
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT DATE(orderdate) AS order_date, sellerid, SUM(orderoftotparitem) AS total_sales_per_day FROM orders WHERE sellerid = %s GROUP BY DATE(orderdate)",(sellerid,))
+    salestrend = cursor.fetchall()
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT SUM(orders.orderoftotparitem), products.ptitle  FROM orders  JOIN products ON orders.orderproductid = products.esin  WHERE orders.sellerid = %s GROUP BY products.ptitle;",(sellerid,))
+    revbyprod = cursor.fetchall()
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("select count(orders.orderstatus),orders.orderstatus from orders where orders.sellerid = %s group by orders.orderstatus",(sellerid,))
+    ordstat = cursor.fetchall()
+
+
+
+    cursor = mysql.connection.cursor()
+    cursor.execute(" SELECT DATE_FORMAT(orderdate, '%%Y-%%m') AS month,SUM(ordertotal) AS revenue FROM orders where sellerid =%s GROUP BY DATE_FORMAT(orderdate, '%%Y-%%m') ORDER BY month ASC",(sellerid,))
+    revdata = cursor.fetchall()
+    print(revdata)
+
+
+
+    return render_template('analytics.html', active='analytics', data1 = salestrend ,data2 = revbyprod , data3 = ordstat ,revdata = revdata)
 
 @app.route('/addproducts')
 def addproducts():

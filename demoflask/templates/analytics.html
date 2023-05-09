@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="/static/analytics.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -18,77 +21,238 @@
 
     {% block content %}
     <h3>Analytics</h3>
-    <div class="container">
-        <div class="card">
-            <h2>Total Users</h2>
-            <p>5000</p>
-            <div class="chart">
-                <div id="chart1"></div>
-            </div>
+    <div class="graphcontainer">
+        <div class="graph">
+            <canvas id="myChart-1"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-2"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-3"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-4"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="myChart-5"></canvas>
         </div>
 
-        <div class="card">
-            <h2>Total Revenue</h2>
-            <p>$50000</p>
-            <div class="chart">
-                <div id="chart2"></div>
-            </div>
-        </div>
 
-        <div class="card">
-            <h2>Orders</h2>
-            <p>500</p>
-            <div class="chart">
-                <div id="chart3"></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Conversion Rate</h2>
-            <p>5%</p>
-            <div class="chart">
-                <div id="chart4"></div>
-            </div>
-        </div>
     </div>
+    <script>
+        var ctx = document.getElementById('myChart-1').getContext('2d');
+        var data = {{ data1 | tojson }};
+
+
+
+        var labels = [];
+        var sales = [];
+
+        for (var i = 0; i < data.length; i++) {
+            // Use toLocaleDateString to format date in local time zone
+            labels.push(new Date(data[i][0]).toLocaleDateString());
+            sales.push(parseFloat(data[i][2])); // Convert sales to float
+        }
+
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales Trend',
+                    data: sales,
+                    borderColor: 'rgb(255, 99, 132)',
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: "Daily Sales Trend"
+                }
+            }
+        });
+    </script>
+
+
+    <script>
+        var data = {{ data2 | tojson }};
+
+        var mon = [];
+        var vals = [];
+        var barColors = [];
+
+
+
+        for (var i = 0; i < data.length; i++) {
+            mon.push(data[i][1]); //change to the second column
+            vals.push(data[i][0]); //change to the first column
+            barColors.push(getRandomColor()); // add a function to generate random colors
+        }
+
+        new Chart("myChart-2", {
+            type: "bar",
+            data: {
+                labels: mon,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: vals
+                }]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: "Sale of Individual Product"
+                }
+            }
+        });
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+
+
+
+    <script>
+        var ctx = document.getElementById('myChart-3').getContext('2d');
+        var data = {{ data3 | tojson }};
+        console.log(data);
+        var labels = []
+        var dataofstat = []
+        console.log(labels);
+        for (var i = 0; i < data.length; i++) {
+            // Use toLocaleDateString to format date in local time zone
+            labels.push(data[i][0]);
+            dataofstat.push(data[i][1]); // Convert sales to float
+        }
+
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: dataofstat,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Order Status'
+                }
+            }
+        });
+    </script>
+
+
+    <script>
+        var ctx = document.getElementById('myChart-4').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    data: [12, 19, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'My Pie Chart'
+                }
+            }
+        });
+
+    </script>
+    <script>
+        var revenueData = {{ revdata| tojson }};
+        var months = [];
+        var revenue = [];
+
+        // Extract data from JSON and format it for Chart.js
+        for (var i = 0; i < revenueData.length; i++) {
+            months.push(revenueData[i][0]);
+            revenue.push(revenueData[i][1]);
+        }
+
+        // Create bar chart using Chart.js
+        var ctx = document.getElementById('revenue-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenue,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Revenue by Month'
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+    </script>
 
 
 
     {% endblock %}
 
-    <script>
-       
-		// Chart 1: Total Users
-    var ctx1 = document.getElementById("chart1").getContext('2d');
-    var myChart1 = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Total Users'],
-            datasets: [{
-                label: '# of Users',
-                data: [5000],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-            // Chart 2: Total Sales
-           
-    </script>
+
 
 
 </body>

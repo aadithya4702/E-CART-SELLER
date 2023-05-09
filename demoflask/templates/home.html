@@ -20,29 +20,38 @@
         <h3 id="datetime">
         </h3>
     </div>
+
     <div class="boxpart">
         <div class="boxes">
             <h3 id="boxicons"><i class="far fa-chart-bar"></i></h3>
             <h3>Total Sales:</h3>
-            <span>10000</span>
+            <span>{{ statdata[0] }}</span>
 
 
         </div>
         <div class="boxes">
             <h3 id="boxicons"><i class="fa fa-scroll"></i></h3>
             <h3>Total Orders:</h3>
-            <span>10000</span>
+            <span>{{statdata[1]}}</span>
         </div>
         <div class="boxes">
             <h3 id="boxicons"><i class="fas fa-thumbtack"></i></h3>
             <h3>Pending Orders:</h3>
-            <span>10000</span>
+            <span>{{statdata[2]}}</span>
         </div>
-        <div class="boxes">
+        
+        <!-- <div class="boxes">
             <h3 id="boxicons"><i class="fas fa-tasks"></i></h3>
             <h3>Completed Orders:</h3>
             <span>10000</span>
-        </div>
+        </div> -->
+        <a href="/addproducts">
+        <div class="boxes">
+            <h3 id="boxicons"><i class="fas fa-plus" style="width: 40px;height: 40px;"></i></h3>
+            <h3>Add Products</h3>
+
+
+        </div></a>
 
     </div>
     <h3 id="reco">Recent Orders</h3>
@@ -57,66 +66,15 @@
                 <th>Payment status</th>
                 <th>Order Status</th>
             </tr>
+            {% for  data in rdata %}
             <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
+                <td>{{data[2]}}</td>
+                <td>#{{data[0]}}</td>
+                <td>{{data[1]}}</td>
+                <td>{{data[3]}}</td>
             </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
-            <tr>
-                <td>bag</td>
-                <td>#sXlfM3</td>
-                <td>paid</td>
-                <td>pending</td>
-            </tr>
+            {% endfor %}
+            
 
 
         </table>
