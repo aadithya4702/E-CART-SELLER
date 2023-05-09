@@ -16,10 +16,59 @@
     {% block title %}Report{% endblock %}
 
     {% block content %}
-    <div class="c">
-        <h3>helo</h3>
-    </div>
+    <header>
+        Help - Seller Dashboard
+    </header>
+    <main>
+        <section class="video">
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
 
+        </section>
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I add a new product?</h3>
+                <p>To add a new product, go to the "Products" page and click the "Add Product" button. Fill in the
+                    required
+                    information and click "Save".</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I edit an existing product?</h3>
+                <p>To edit an existing product, go to the "Products" page and click the "Edit" button next to the
+                    product you
+                    want to edit. Make the necessary changes and click "Save".</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I view my sales report?</h3>
+                <p>To view your sales report, go to the "Sales" page and select the date range you want to view. Click
+                    the "View
+                    Report" button to see your sales data.</p>
+            </div>
+        </section>
+
+    </main>
+    <section>
+        <h2>Contact Us</h2>
+        <p>If you have any further questions or issues, please contact us at <a
+                href="mailto:support@sellerdashboard.com" style="color: goldenrod;">support@sellerdashboard.com</a>.</p>
+    </section>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        // Attach a click event listener to each FAQ item
+        faqItems.forEach(function (item) {
+            const question = item.querySelector('h3');
+            const answer = item.querySelector('p');
+
+            question.addEventListener('click', function () {
+                answer.classList.toggle('show');
+            });
+        });
+    </script>
     {% endblock %}
 
 </body>

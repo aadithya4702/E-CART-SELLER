@@ -1,3 +1,57 @@
-.c>h3{
-    color: goldenrod;
+header {
+  background-color: #2f4050;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+/* Style for main content */
+main {
+  display: flex;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* Style for section headings */
+h2 {
+  color: #2f4050;
+  font-size: 20px;
+  margin-top: 30px;
+}
+/* Style for FAQ items */
+.faq {
+  margin-bottom: 20px;
+}
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-item h3 {
+  color: #2f4050;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.faq-item p {
+  display: none;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.faq-item p.show {
+  display: block;
+}
+
+.faq-item p:last-child {
+  margin-bottom: 0;
+}
+video {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
 }
