@@ -160,6 +160,7 @@
             <thead>
                 <tr>
                     <th>Order ID</th>
+                    <th>Username</th>
                     <th>Date</th>
                     <th>Amount</th>
                     <th>Status</th>
@@ -167,37 +168,44 @@
                 </tr>
             </thead>
             <tbody>
+                {% for order in orders %}
                 <tr>
-                    <td>ORD-123456</td>
-                    <td>2022-05-01</td>
-                    <td>$150.00</td>
-                    <td class="order-status pending-status">Pending</td>
-                    <td><a href="#" class="change-status-btn">Change Status</a></td>
+                    <td>{{ order[0] }}</td>
+                    <td>{{order[1]}}</td>
+                    <td>{{ order[2] }}</td>
+                    <td>&#8377;{{ order[3] }}</td>
+                    <td>{{ order[4] }}</td>
+                    <td><button onclick="changeStatus('{{ order[0] }}')"><i class="fas fa-edit"></i></button></td>
+
                 </tr>
-                <tr>
-                    <td>ORD-123457</td>
-                    <td>2022-04-30</td>
-                    <td>$80.00</td>
-                    <td class="order-status shipped-status">Shipped</td>
-                    <td><a href="#">View Details</a></td>
-                </tr>
-                <tr>
-                    <td>ORD-123458</td>
-                    <td>2022-04-28</td>
-                    <td>$250.00</td>
-                    <td class="order-status delivered-status">Delivered</td>
-                    <td><a href="#">View Details</a></td>
-                </tr>
-                <tr>
-                    <td>ORD-123459</td>
-                    <td>2022-04-25</td>
-                    <td>$90.00</td>
-                    <td class="order-status cancelled-status">Cancelled</td>
-                    <td><a href="#">View Details</a></td>
-                </tr>
+                {% endfor %}
+
             </tbody>
         </table>
     </div>
+
+    <script>
+        function changeStatus(orderId) {
+            console.log(orderId);
+            var newStatus = prompt("Enter new status (pending/dispatched):");
+            if (newStatus != null) {
+                if (newStatus == "pending" || newStatus == "dispatched") {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/change_status", true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            location.reload();
+                        }
+                    };
+                    xhr.send(JSON.stringify({ id: orderId, status: newStatus }));
+                } else {
+                    alert("Invalid status. Please enter pending or dispatched.");
+                }
+            }
+        }
+
+    </script>
 
     {% endblock %}
 

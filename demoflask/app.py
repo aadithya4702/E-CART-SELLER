@@ -406,8 +406,29 @@ def addproducts():
 
 @app.route('/orderspage')
 def orderspage():
+    user_data = inject_data()
+    sellerid = user_data.get('sellerid')
+    cur = mysql.connection.cursor()
+    cur.execute("select * from orders where sellerid = %s",(sellerid,))
+    orders = cur.fetchall()
 
-    return render_template('orderspage.html', active='order')
+
+    return render_template('orderspage.html', active='order',orders = orders)
+
+
+@app.route('/change_status', methods=['POST'])
+def change_status():
+    data = request.get_json()
+    order_id = data['id']
+    new_status = data['status']
+    print(order_id)
+    print(new_status)
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE orders SET orderstatus=%s WHERE orderid=%s", (new_status, order_id))
+    mysql.connection.commit()
+    cur.close()
+    return jsonify({'message': 'Status changed successfully'})
+
 
 @app.route('/report')
 def report():
