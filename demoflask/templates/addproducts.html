@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/addproducts.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
 
 </head>
@@ -76,7 +77,8 @@
                         </div>
                         <div class="form-group">
                             <label for="csv-file-input">CSV File</label>
-                            <input type="file" class="form-control-file" accept=".xlsx,.xls" id="csv-file-input" name="file">
+                            <input type="file" class="form-control-file" accept=".xlsx,.xls" id="csv-file-input"
+                                name="file">
                         </div>
 
                         <center><button type="submit" onclick="validateFile()" class="btn btn-primary">Add
@@ -96,7 +98,7 @@
                                 <option value="Jewels">Jewels</option>
                                 <option value="Bags">Bags</option>
                                 <option value="Shoes">Shoes</option>
-                                <option value="Grocery">Grocery</option>
+                                <option value="Grocery" class="grocery">Grocery</option>
                             </select>
                             <label for="subcategory">SubCategory<sup>*</sup></label>
                             <select name="subcategory" id="subcategory" disabled>
@@ -129,11 +131,17 @@
                                 </td>
                                 <td><input type="text" name="desc" id="pdesc"></td>
                             </tr>
+                            <tr class="rowdet" id="expdate" style="display:none">
+                                <td id="colapse">
+                                    <h3>Expiry date<sup>*</sup></h3>
+                                </td>
+                                <td><input type="date" name="exdate" id="exdate"></td>
+                            </tr>
                             <tr class="rowdet">
                                 <td id="colapse">
                                     <h3>Product Price<sup>*</sup></h3>
                                 </td>
-                                <td><input type="text" name="price" id="pprice" placeholder="Enter amount in usd..">
+                                <td><input type="text" name="price" id="pprice" placeholder="Enter amount..">
                                 </td>
                             </tr>
                             <tr class="rowdet">
@@ -234,6 +242,19 @@
 
 
 
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#category').change(function () {
+
+                if ($(this).find(':selected').hasClass('grocery')) {
+                    $('#expdate').show();
+                } else {
+                    $('#expdate').hide();
+                }
+            });
+        });
 
     </script>
 

@@ -164,6 +164,7 @@ def add_single_product():
     subcategory = request.form['subcategory']
     brand = request.form['brand']
     title = request.form['title']
+    expdate = request.form['exdate']
     description = request.form['desc']
     price = request.form['price']
     orgprice = request.form['orgprice']
@@ -177,19 +178,23 @@ def add_single_product():
     currency = request.form['currency']
     
     # encoded_data = base64.b64encode(image).decode('utf-8')  # Decode the encoded data before inserting into the database
-    insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency)
+    if category != "Grocery":
+         insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency)
+    else:
+        insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate)
+
     return 'Product added successfully'
 
-def insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency):
+def insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate):
     user_data = inject_data()
     seller= user_data.get('sellerid')
     
     cursor = mysql.connection.cursor()
     # SQL query to insert data into products table
-    sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid, currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid, currency,expiry) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)"
 
     # Execute the query
-    cursor.execute(sql, (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, image1, image2, image3, seller, currency))
+    cursor.execute(sql, (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, image1, image2, image3, seller, currency,expdate))
     # Commit the changes to the database
     mysql.connection.commit()
     # Close the database connection
