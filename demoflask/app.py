@@ -460,18 +460,24 @@ def productspage():
     uname = session.get('username')
     cursor = mysql.connection.cursor()
     cursor1 = mysql.connection.cursor()
+    stat = 0
     cursor.execute("Select id from seller Where username = %s",(uname,))
     id = cursor.fetchone()
 
     cursor1.execute("select * from products where sellerid = %s",(id,))
     res = cursor1.fetchall()
-
+    if res[0][2]  == "Grocery":
+         stat = 1
+         cursor1.execute("SELECT count(ptitle) FROM products WHERE expiry <= DATE_ADD(CURDATE(), INTERVAL 10 DAY) and sellerid = %s;",(id,))
+         exp = cursor1.fetchall()
+   
     cursor1.execute("SELECT COUNT(*) AS total_products, SUM(CASE WHEN pstock <= 10 THEN 1 ELSE 0 END) AS low_stock_products FROM products WHERE sellerid = %s;",(id,))
     fildata = cursor1.fetchall()
+    print(stat)
 
     
 
-    return render_template('productspage.html',result = res,fildata =fildata, active='product')
+    return render_template('productspage.html',result = res,fildata =fildata,stat = stat,exp =exp, active='product')
 
 
 @app.route('/update', methods=['POST'])

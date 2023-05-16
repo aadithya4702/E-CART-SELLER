@@ -43,6 +43,18 @@
                 <h3>Stocks Less Than 10:</h3>
                 <span>{{data[1]}}</span>
             </div>
+
+            {% if stat %}
+            <div class="boxes">
+                <h3 id="boxicons"><i class="fas fa-exclamation-circle" style="background-color: red;"></i></h3>
+                <h3>Need Attention:</h3>
+                <span style="color:crimson;opacity: 0.7;">Going to expire</span>
+                {% for data in exp %}
+                <span>{{data[0]}}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             {% endfor %}
 
         </div>
