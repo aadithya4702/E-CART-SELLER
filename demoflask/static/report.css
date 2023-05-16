@@ -21,6 +21,7 @@ h2 {
 /* Style for FAQ items */
 .faq {
   margin-bottom: 20px;
+  margin-left: 30px;
 }
 .faq-item {
   margin-bottom: 20px;

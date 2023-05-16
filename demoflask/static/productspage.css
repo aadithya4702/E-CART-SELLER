@@ -19,6 +19,9 @@ a {
 body {
   font-family: "Poppins", sans-serif;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 .search {
   display: flex;
 
@@ -107,13 +110,16 @@ tbody tr:nth-child(even) {
   color: red;
 }
 .rgfilter {
-  width: 90%;
-  height: 50px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   background-color: #edf2f4;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 10px 10px 50px 0;
+
   padding: 10px;
   border-radius: 10px;
 }

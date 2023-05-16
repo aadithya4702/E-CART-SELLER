@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/productspage.css">
+    <link rel="stylesheet" href="/static/home.css">
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon">
 
 </head>
@@ -22,7 +23,7 @@
 
         <h3>Products List</h3>
 
-        <div class="sfield">
+        <div class="sfield" style="opacity: 0.4; cursor: not-allowed;">
             <input type="search" name="searcch" id="ser" placeholder="Search for products..">
             <span><i class="fas fa-search"></i></span>
         </div>
@@ -30,7 +31,19 @@
 
     <div style="display: flex;flex-direction: column;opacity: 1;" class="blur">
         <div class="rgfilter">
-            <h3>Filter</h3>
+            {% for data in fildata %}
+            <div class="boxes">
+                <h3 id="boxicons"><i class="far fa-chart-bar"></i></h3>
+                <h3>Total Products:</h3>
+                <span>{{data[0]}}</span>
+            </div>
+
+            <div class="boxes">
+                <h3 id="boxicons"><i class="fas fa-exclamation-circle" style="background-color: red;"></i></h3>
+                <h3>Stocks Less Than 10:</h3>
+                <span>{{data[1]}}</span>
+            </div>
+            {% endfor %}
 
         </div>
         <div class="prodlist">
