@@ -1,5 +1,5 @@
 import random
-from flask import Flask, make_response, render_template ,request ,redirect ,url_for, session, Response, send_file, flash
+from flask import Flask, jsonify, make_response, render_template ,request ,redirect ,url_for, session, Response, send_file, flash
 from flask_mysqldb import MySQL
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
@@ -146,11 +146,16 @@ def add_products():
         pimage1 = 0
         pimage2 = 0
         pimage3 = 0
+        expirydate = row['Expiry']
 
         # Insert the values into the database
         cursor = mysql.connection.cursor()
-        sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid,currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-        values = (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, pimage1, pimage2, pimage3, sellerid, currency)
+        if category != "Grocery":
+            sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid,currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            values = (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, pimage1, pimage2, pimage3, sellerid, currency)
+        else:
+                    sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid,currency,expiry) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                    values = (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, pimage1, pimage2, pimage3, sellerid, currency, expirydate)
         cursor.execute(sql, values)
         mysql.connection.commit()
 
