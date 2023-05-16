@@ -143,10 +143,12 @@ def add_products():
         stock = row['Stock']
         sellerid = user_data.get('sellerid')
         currency = 'USD'
+        expirydate = row['Expiry']
         pimage1 = 0
         pimage2 = 0
         pimage3 = 0
-        expirydate = row['Expiry']
+        
+        print(expirydate)
 
         # Insert the values into the database
         cursor = mysql.connection.cursor()
