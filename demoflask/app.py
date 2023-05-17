@@ -461,6 +461,7 @@ def productspage():
     cursor = mysql.connection.cursor()
     cursor1 = mysql.connection.cursor()
     stat = 0
+    exp =0
     cursor.execute("Select id from seller Where username = %s",(uname,))
     id = cursor.fetchone()
 
@@ -488,8 +489,9 @@ def update():
     pprice = request.form['pprice']
     pmrp = request.form['pmrp']
     stock = request.form['pstock']
+    exp = request.form['pexp']
     cursor = mysql.connection.cursor()
-    cursor.execute("UPDATE products SET ptitle=%s, pdescription=%s, pprice=%s, porgprice=%s, pstock=%s WHERE esin=%s", (title, description, pprice, pmrp, stock, id))
+    cursor.execute("UPDATE products SET ptitle=%s, pdescription=%s, pprice=%s, porgprice=%s, pstock=%s, expiry=%s WHERE esin=%s", (title, description, pprice, pmrp, stock,exp, id))
     mysql.connection.commit()
 
     return redirect(url_for('productspage'))
