@@ -85,6 +85,7 @@
                         <td id="pmrp">{{data[8]}}</td>
                         <td id="pbrand">{{data[4]}}</td>
                         <td id="pstock">{{data[10]}}</td>
+                        <td id="expiry" style="display: none;">{{data[20]}}</td>
                         <td id="actions"><span><i class="fas fa-edit" value="{{data[1]}}"
                                     data-id="{{ data[1] }}"></i></span><a href="/deleteprod/{{data[1]}} "
                                 method="get"><i class="fas fa-trash"></i></a><span></span></td>
@@ -136,6 +137,13 @@
 
 
             </div>
+            {% if stat %}
+            <div class="input_field">
+                <span id="ico"><i class="fas fa-calendar"></i></span>
+                <input type="text" name="pexp" id="" placeholder="Expiry Date" required>
+            </div>
+            {% endif %}
+
             <div class="subbut">
                 <input type="submit" value="Update" name="register" id="regbut">
             </div>
@@ -153,12 +161,12 @@
         const esinval = document.getElementById("esin");
         const blurElements = document.getElementsByClassName("blur");
 
-
         const ptitle = document.getElementsByName("ptitle")[0];
         const pdesc = document.getElementsByName("pdesc")[0];
         const pprice = document.getElementsByName("pprice")[0];
         const pmrp = document.getElementsByName("pmrp")[0];
         const pstock = document.getElementsByName("pstock")[0];
+        const pexp = document.getElementsByName("pexp")[0];
 
         for (let i = 0; i < edit.length; i++) {
             edit[i].addEventListener("click", (event) => {
@@ -172,6 +180,11 @@
                 pprice.value = event.target.closest("tr").querySelector("#pprice").textContent;
                 pmrp.value = event.target.closest("tr").querySelector("#pmrp").textContent;
                 pstock.value = event.target.closest("tr").querySelector("#pstock").textContent;
+
+                {% if stat != 0 %}
+                pexp.value = event.target.closest("tr").querySelector("#expiry").textContent;
+                {% endif %}
+
                 update.style.display = "flex";
                 blurElements.style.opacity = 0.3;
             });

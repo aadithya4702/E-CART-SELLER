@@ -423,9 +423,11 @@ def orderspage():
     cur = mysql.connection.cursor()
     cur.execute("select * from orders where sellerid = %s",(sellerid,))
     orders = cur.fetchall()
+    cur.execute("SELECT COUNT(*) AS total_orders,SUM(CASE WHEN orderstatus = 'Dispatched' THEN 1 ELSE 0 END) AS dispatched_orders,SUM(CASE WHEN orderstatus = 'Pending' THEN 1 ELSE 0 END) AS pending_orders FROM orders where sellerid = %s;",(sellerid,))
+    data = cur.fetchall()
 
 
-    return render_template('orderspage.html', active='order',orders = orders)
+    return render_template('orderspage.html', active='order',fildata = data,orders = orders)
 
 
 @app.route('/change_status', methods=['POST'])
@@ -489,12 +491,22 @@ def update():
     pprice = request.form['pprice']
     pmrp = request.form['pmrp']
     stock = request.form['pstock']
-    exp = request.form['pexp']
-    cursor = mysql.connection.cursor()
-    cursor.execute("UPDATE products SET ptitle=%s, pdescription=%s, pprice=%s, porgprice=%s, pstock=%s, expiry=%s WHERE esin=%s", (title, description, pprice, pmrp, stock,exp, id))
-    mysql.connection.commit()
+    exp = request.form.get('pexp', '')  # Use get() with a default value
 
+    print(exp)
+    
+    if exp != '':  # Check if exp is not an empty string
+        cursor = mysql.connection.cursor()
+        cursor.execute("UPDATE products SET ptitle=%s, pdescription=%s, pprice=%s, porgprice=%s, pstock=%s, expiry=%s WHERE esin=%s",
+                       (title, description, pprice, pmrp, stock, exp, id))
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute("UPDATE products SET ptitle=%s, pdescription=%s, pprice=%s, porgprice=%s, pstock=%s WHERE esin=%s",
+                       (title, description, pprice, pmrp, stock, id))
+    
+    mysql.connection.commit()
     return redirect(url_for('productspage'))
+
 
 
 @app.route('/updateprofile', methods=['POST'])  
