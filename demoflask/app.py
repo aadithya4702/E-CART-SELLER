@@ -172,6 +172,7 @@ def add_single_product():
     brand = request.form['brand']
     title = request.form['title']
     expdate = request.form['exdate']
+    print(expdate)
     description = request.form['desc']
     price = request.form['price']
     orgprice = request.form['orgprice']
@@ -188,11 +189,26 @@ def add_single_product():
     if category != "Grocery":
          insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency)
     else:
-        insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate)
+        insert_product1(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate)
 
     return 'Product added successfully'
 
-def insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate):
+def insert_product(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency):
+    user_data = inject_data()
+    seller= user_data.get('sellerid')
+    
+    cursor = mysql.connection.cursor()
+    # SQL query to insert data into products table
+    sql = "INSERT INTO products (pcategory, psubcategory, pbrand, ptitle, pdescription, pprice, porgprice, prating, pstock, pimage, pimage1, pimage2, pimage3, sellerid, currency) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+
+    # Execute the query
+    cursor.execute(sql, (category, subcategory, brand, title, description, price, orgprice, rating, stock, image, image1, image2, image3, seller, currency))
+    # Commit the changes to the database
+    mysql.connection.commit()
+    # Close the database connection
+    cursor.close()
+
+def insert_product1(category, subcategory, brand, title, description, price, orgprice, rating, image, image1, image2, image3, stock, currency,expdate):
     user_data = inject_data()
     seller= user_data.get('sellerid')
     
